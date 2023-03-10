@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Sidebar from './components/Sidebar';
 import Editor from './components/Editor';
@@ -10,10 +10,18 @@ import { nanoid } from 'nanoid';
 import './App.css';
 
 export default function App() {
-    const [notes, setNotes] = useState([]);
+    //we make notes state a lazy state by adding a arrow function below so it doesn't run any time we've rendered the app
+    const [notes, setNotes] = useState(
+        () => JSON.parse(localStorage.getItem('notes')) || []
+    );
+
     const [currentNoteId, setCurrentNoteId] = useState(
         (notes[0] && notes[0].id) || ''
     );
+
+    useEffect(() => {
+        localStorage.setItem('notes', JSON.stringify(notes));
+    }, [notes]);
 
     function createNewNote() {
         const newNote = {
