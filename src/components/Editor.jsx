@@ -18,13 +18,13 @@ export default function Editor({ currentNote, updateNote }) {
                 value={currentNote.body}
                 onChange={updateNote}
                 selectedTab={selectedTab}
-                onTabChang={selectedTab}
+                onTabChange={setSelectedTab}
                 generateMarkdownPreview={(markdown) =>
                     Promise.resolve(converter.makeHtml(markdown))
                 }
                 minEditorHeight={80}
                 heightUnits="vh"
-            ></ReactMde>
+            />
         </section>
     );
 }

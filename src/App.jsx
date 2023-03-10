@@ -11,7 +11,7 @@ import './App.css';
 
 export default function App() {
     const [notes, setNotes] = useState([]);
-    const [currenNoteId, setCurrenNoteId] = useState(
+    const [currentNoteId, setCurrentNoteId] = useState(
         (notes[0] && notes[0].id) || ''
     );
 
@@ -21,13 +21,13 @@ export default function App() {
             body: "# Type your markdown note's title here",
         };
         setNotes((prevNotes) => [newNote, ...prevNotes]);
-        setCurrenNoteId(newNote.id);
+        setCurrentNoteId(newNote.id);
     }
 
     function updateNote(text) {
         setNotes((oldNotes) =>
             oldNotes.map((oldNote) => {
-                return oldNote.id === currenNoteId
+                return oldNote.id === currentNoteId
                     ? { ...oldNote, body: text }
                     : oldNote;
             })
@@ -37,7 +37,7 @@ export default function App() {
     function findCurrentNote() {
         return (
             notes.find((note) => {
-                return note.id=== currenNoteId;
+                return note.id === currentNoteId;
             }) || notes[0]
         );
     }
@@ -52,11 +52,11 @@ export default function App() {
                 >
                     <Sidebar
                         notes={notes}
-                        currenNote={findCurrentNote()}
-                        setCurrenNoteId={setCurrenNoteId}
+                        currentNote={findCurrentNote()}
+                        setCurrentNoteId={setCurrentNoteId}
                         newNote={createNewNote}
                     />
-                    {currenNoteId && notes.length > 0 && (
+                    {currentNoteId && notes.length > 0 && (
                         <Editor
                             currentNote={findCurrentNote()}
                             updateNote={updateNote}
