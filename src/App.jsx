@@ -20,7 +20,7 @@ export default function App() {
     );
 
     useEffect(() => {
-        localStorage.setItem('notes', JSON.stringify(notes));
+      localStorage.setItem('notes', JSON.stringify(notes));
     }, [notes]);
 
     function createNewNote() {
