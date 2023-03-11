@@ -47,7 +47,7 @@ export default function App() {
         });
     }
 
-    //this is the first map that doesn't rearrange the latest notes to the top
+    //?this is the first version of updateNote function that doesn't rearrange the latest notes to the top
     // function updateNote(text) {
     //     setNotes((oldNotes) =>
     //         oldNotes.map((oldNote) => {
@@ -57,6 +57,11 @@ export default function App() {
     //         })
     //     );
     // }
+
+    function deleteNote(event, noteId) {
+        event.stopPropagation();
+        setNotes((oldNotes) => oldNotes.filter((note) => note.id !== noteId));
+    }
 
     function findCurrentNote() {
         return (
@@ -79,6 +84,7 @@ export default function App() {
                         currentNote={findCurrentNote()}
                         setCurrentNoteId={setCurrentNoteId}
                         newNote={createNewNote}
+                        deleteNote={deleteNote}
                     />
                     {currentNoteId && notes.length > 0 && (
                         <Editor
